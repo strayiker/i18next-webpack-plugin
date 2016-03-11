@@ -1,19 +1,34 @@
 {
-	"name": "i18n-webpack-plugin",
-	"version": "0.2.7",
-	"author": "Tobias Koppers @sokra",
-	"description": "Embed localization into your bundle",
-	"peerDependencies": {
-		"webpack": ">=0.10 <2"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "http://www.opensource.org/licenses/mit-license.php"
-		}
-	],
-	"repository": { 
-		"type": "git",
-		"url" : "https://github.com/webpack/i18n-webpack-plugin.git"
-	}
+  "name": "i18next-webpack-plugin",
+  "version": "0.1",
+  "author": "Kamil Głód @kamilglod",
+  "description": "Embed localization into your bundle",
+  "scripts": {
+    "test": "mocha && npm run lint",
+    "test:watch": "mocha --watch",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "webpack": ">=0.10 <2"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamilglod/i18n-webpack-plugin.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.3.0",
+    "mocha": "^2.4.5",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "cli-color": "^1.1.0",
+    "i18next": "^2.3.3"
+  }
 }

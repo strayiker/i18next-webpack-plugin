@@ -1,0 +1,8 @@
+{
+  "translation": {
+    "Hello World": "Hallo Welt",
+    "car": "tank",
+    "qwe": "this is qwe",
+    "{{ what }} is {{ how }}": "{{ what }} ist {{ how }}"
+  }
+}
