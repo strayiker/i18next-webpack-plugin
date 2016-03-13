@@ -1,6 +1,6 @@
 /*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
 */
 var ConstDependency = require("webpack/lib/dependencies/ConstDependency");
 var NullFactory = require("webpack/lib/NullFactory");
@@ -47,17 +47,16 @@ I18nPlugin.prototype.apply = function(compiler) {
   var q = this.quotes;
   var lang = this.lang;
 
-	compiler.plugin("compilation", function(compilation) {
-		compilation.dependencyFactories.set(ConstDependency, new NullFactory());
-		compilation.dependencyTemplates.set(ConstDependency, new ConstDependency.Template());
-	});
+  compiler.plugin("compilation", function(compilation) {
+    compilation.dependencyFactories.set(ConstDependency, new NullFactory());
+    compilation.dependencyTemplates.set(ConstDependency, new ConstDependency.Template());
+  });
 
-	compiler.parser.plugin("call " + this.functionName, function(expr) {
+  compiler.parser.plugin("call " + this.functionName, function(expr) {
     var args = expr.arguments.map(function(arg) {return extractArgs(arg)});
 
     i18next.changeLanguage(lang, function (err, t) {
       var value = q + t.apply(i18next, args) + q;
-      console.log(i18next.language, args, value);
 
       var dep = new ConstDependency(value, expr.range);
       dep.loc = expr.loc;
@@ -65,8 +64,8 @@ I18nPlugin.prototype.apply = function(compiler) {
 
     }.bind(this));
 
-		return true;
-	});
+    return true;
+  });
 
 };
 

@@ -1,8 +1,9 @@
 {
   "name": "i18next-webpack-plugin",
-  "version": "0.1",
-  "author": "Kamil Głód @kamilglod",
+  "version": "0.1.1",
+  "author": "Kamil Głód @kglod",
   "description": "Embed localization into your bundle",
+  "main": "index",
   "scripts": {
     "test": "mocha && npm run lint",
     "test:watch": "mocha --watch",
