@@ -8,6 +8,7 @@
     "no-underscore-dangle": 0,
     "no-multi-comp": 0,
     "no-unused-vars": 0,
+    "linebreak-style": ["error", "windows"],
     "comma-dangle": ["error", "never"],
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,

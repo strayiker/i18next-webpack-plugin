@@ -3,12 +3,12 @@
  */
 
 
-export default function extractArgs(arg, q, wrap) {
+export default function extractArgs(arg, q, quote) {
   switch (arg.type) {
     case 'Literal':
       return arg.value;
     case 'Identifier':
-      if (wrap) {
+      if (quote) {
         return `${q}+${arg.name}+${q}`;
       }
       return arg.name;
