@@ -6,12 +6,17 @@
 export default class MissingLocalizationError extends Error {
   constructor(module, name, value) {
     super();
-    super.captureStackTrace(this, MissingLocalizationError);
 
     this.name = 'MissingLocalizationError';
     this.requests = [{ name, value }];
     this.module = module;
     this.buildMessage();
+
+    if (typeof Error.captureStackTrace !== 'function') {
+      this.stack = (new Error(this.message)).stack;
+    } else {
+      Error.captureStackTrace(this, MissingLocalizationError);
+    }
   }
 
   buildMessage = () => {

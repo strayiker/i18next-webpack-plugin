@@ -2,31 +2,24 @@
  * Created by Kir on 06.08.2016.
  */
 
-
-export default function extractArgs(arg, q, quote) {
+export default function extractArgs(arg) {
   switch (arg.type) {
     case 'Literal':
       return arg.value;
     case 'Identifier':
-      if (quote) {
-        return `${q}+${arg.name}+${q}`;
-      }
       return arg.name;
-    case 'BinaryExpression':
-      return extractArgs(arg.left, q, true) + extractArgs(arg.right, q, true);
-    case 'ObjectExpression': {
-      const res = {};
-      for (const i of arg.properties) {
-        const key = extractArgs(arg.properties[i].key, q);
-        res[key] = extractArgs(arg.properties[i].value, q, true);
+    case 'MemberExpression':
+      return `${extractArgs(arg.object)}.${extractArgs(arg.property)}`;
+    case 'ObjectExpression':
+      {
+        const res = {};
+        for (const key of Object.keys(arg.properties)) {
+          res[extractArgs(arg.properties[key].key)] =
+            extractArgs(arg.properties[key].value);
+        }
+        return res;
       }
-      return res;
-    }
-    default: {
-      this.state.module.errors.push(new Error(
-        `I18nextPlugin. Unable to parse arg ${arg}.`
-      ));
-      return '';
-    }
+    default:
+      throw new Error(`I18nextPlugin. Unable to parse arg ${arg}.`);
   }
 }

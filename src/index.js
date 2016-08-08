@@ -1,6 +1,5 @@
-/*
- MIT License http://www.opensource.org/licenses/mit-license.php
- Author Tobias Koppers @sokra
+/**
+ * Created by mesnyankin_k on 05.08.2016.
  */
 
 import ConstDependency from 'webpack/lib/dependencies/ConstDependency';
@@ -41,28 +40,38 @@ export default class I18nextPlugin {
         }
       };
 
-      let token;
-      let options = defaultOptions;
+      let token = '';
+      let options = {};
 
       switch (expr.arguments.length) {
         case 2:
-          token = extractArgs.apply(this, [expr.arguments[0], q]);
-          options = extractArgs.apply(this, [expr.arguments[1], q]);
-          Object.assign(options, options);
+          {
+            try {
+              token = extractArgs(expr.arguments[0]);
+              options = extractArgs(expr.arguments[1]);
 
-          if (typeof token !== 'string' || typeof options !== 'object') {
-            return;
+              for (const key of Object.keys(options)) {
+                options[key] = `${q}+${options[key]}+${q}`;
+              }
+
+              options = Object.assign({}, defaultOptions, options);
+            } catch (ex) {
+              this.state.module.errors.push(ex);
+            }
+
+            break;
           }
-
-          break;
         case 1:
-          token = extractArgs.apply(this, [expr.arguments[0], q, true]);
+          {
+            try {
+              token = extractArgs(expr.arguments[0]);
+              options = defaultOptions;
+            } catch (ex) {
+              this.state.module.errors.push(ex);
+            }
 
-          if (typeof token !== 'string') {
-            return;
+            break;
           }
-
-          break;
         default:
           return;
       }
