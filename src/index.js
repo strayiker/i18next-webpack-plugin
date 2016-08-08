@@ -14,7 +14,7 @@ export default class I18nextPlugin {
     failOnMissing,
     functionName = '__',
     quotes = '\''
-  }) {
+  } = {}) {
     this.i18next = i18next;
     this.lang = lang;
     this.failOnMissing = !!failOnMissing;
